@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="CustomFontTextView">
+        <attr name="textFont" format="string" />
+        <attr name="textStyle" format="integer" />
+    </declare-styleable>
+    <integer name="regular">0</integer>
+    <integer name="semibold">1</integer>
+    <integer name="bold">2</integer>
+    <!--Circular imageView with border-->
+    <declare-styleable name="CircleImgViewWithBorder">
+        <attr name="civ_border_width" format="dimension" />
+        <attr name="civ_border_color" format="color" />
+        <attr name="civ_border_overlay" format="boolean" />
+        <attr name="civ_fill_color" format="color" />
+    </declare-styleable>
+</resources>
