@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ECommerceApp</string>
+    <string name="app_name">Order Organic</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="nav_header_title">Android Studio</string>
@@ -9,8 +9,13 @@
     <string name="text_permission_necessary">Permission necessary</string>
     <string name="text_external_storage_permission_is_necessary">External storage permission is necessary</string>
     <string name="title_home">Home</string>
-    <string name="title_dashboard">Dashboard</string>
-    <string name="title_notifications">Notifications</string>
+    <string name="title_offers">Top Offers</string>
+    <string name="title_cart">My Cart</string>
     <string name="title_activity_main2">Main2Activity</string>
+    <string name="title_search">Search</string>
+    <string name="title_profile">Profile</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 
 </resources>

@@ -162,14 +162,14 @@ public class MySharedPreference {
             if (getTestPointingStatus(context) == 0)
                 return MYURL.PRODUCTION_BASE_URL;
             else if (getTestPointingStatus(context) == 1)
-                return MYURL.TEST_BASE_URL;
+                return MYURL.PRODUCTION_BASE_URL;
             else
                 return MYURL.PRODUCTION_BASE_URL;
         } else {
             if (getTestPointingStatus() == 0)
                 return MYURL.PRODUCTION_BASE_URL;
             else if (getTestPointingStatus() == 1)
-                return MYURL.TEST_BASE_URL;
+                return MYURL.PRODUCTION_BASE_URL;
             else
                 return MYURL.PRODUCTION_BASE_URL;
         }
@@ -181,14 +181,14 @@ public class MySharedPreference {
             if (getTestPointingStatus(context) == 0)
                 return MYURL.PRODUCTION_BASE_URL;
             else if (getTestPointingStatus(context) == 1)
-                return MYURL.TEST_BASE_URL;
+                return MYURL.PRODUCTION_BASE_URL;
             else
                 return MYURL.PRODUCTION_BASE_URL;
         } else {
             if (getTestPointingStatus() == 0)
                 return MYURL.PRODUCTION_BASE_URL;
             else if (getTestPointingStatus() == 1)
-                return MYURL.TEST_BASE_URL;
+                return MYURL.PRODUCTION_BASE_URL;
             else
                 return MYURL.PRODUCTION_BASE_URL;
         }
