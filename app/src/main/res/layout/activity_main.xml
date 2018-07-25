@@ -11,7 +11,7 @@
 
         <include
             layout="@layout/app_bar_main2" />
-
+<!--
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
@@ -19,6 +19,35 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:headerLayout="@layout/nav_header_main"
-        app:menu="@menu/activity_main_drawer" />
+        app:menu="@menu/activity_main_drawer" />-->
+
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
+        android:layout_width="wrap_content"
+        android:background="@color/black"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true" >
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="50dp">
+
+            <com.pracha.orderorganic.utils.ExpandableNavigationListView
+                android:id="@+id/expandable_navigation"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="left"
+                android:divider="@drawable/divider_line"
+                android:groupIndicator="@null"
+                android:scrollbars="vertical"
+                >
+
+
+            </com.pracha.orderorganic.utils.ExpandableNavigationListView>
+        </ScrollView>
+    </android.support.design.widget.NavigationView>
 
 </android.support.v4.widget.DrawerLayout>

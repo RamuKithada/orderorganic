@@ -5,71 +5,69 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.pracha.orderorganic.apis.MyService;
 import com.pracha.orderorganic.database.MyApplication;
-import com.pracha.orderorganic.models.models.home.HomePageDetails;
-import com.pracha.orderorganic.views.HomeDetailsView;
+import com.pracha.orderorganic.models.models.sidemenu.HomeMenuList;
+import com.pracha.orderorganic.views.MenuListView;
 
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 
-public class HomeDetailsPresenter implements BasePresenter<HomeDetailsView> {
+public class MenuListPresenter implements BasePresenter<MenuListView> {
 
+    private MenuListView menuListView;
     private Subscription subscription;
-
-    private HomePageDetails homePageDetails;
-
-    private HomeDetailsView homeDetailsView;
+    private HomeMenuList homeMenuList;
 
     @Override
-    public void attachView(HomeDetailsView view) {
-        this.homeDetailsView = view;
+    public void attachView(MenuListView view) {
+        this.menuListView = view;
     }
 
     @Override
     public void detachView() {
-        homeDetailsView = null;
-        if (subscription!=null)
+        menuListView = null;
+        if (subscription != null)
             subscription.unsubscribe();
     }
 
-
-    public void getHomeDetails(){
-
-        MyApplication myApplication = MyApplication.get(homeDetailsView.getContext());
+    public void getMenuListDetails() {
+        MyApplication myApplication = MyApplication.get(menuListView.getContext());
         MyService myService = myApplication.getCKService();
 
-        subscription = myService.getHomePageDetails()
+        subscription = myService.getMenuListDetails()
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(myApplication.defaultSubscribeScheduler())
-                .subscribe(new Subscriber<HomePageDetails>() {
+                .subscribe(new Subscriber<HomeMenuList>() {
                     @Override
                     public void onCompleted() {
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                homeDetailsView.showProgressIndicator(false);
-                                homeDetailsView.getHomeDetails(homePageDetails);
+
+                                menuListView.showProgressIndicator(false);
+                                menuListView.getMenuListDetails(homeMenuList);
+
                             }
                         }).run();
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("HomeError", "" + e.getMessage());
-                        homeDetailsView.showProgressIndicator(false);
+                        Log.e("HomeMenuError", "" + e.getLocalizedMessage() + "" + e.getMessage());
+                        menuListView.showProgressIndicator(false);
                     }
 
                     @Override
-                    public void onNext(final HomePageDetails homePageDetails) {
+                    public void onNext(final HomeMenuList homeMenuList) {
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
-                                String res = new Gson().toJson(homePageDetails);
-                                Log.e("homeresponse",""+res);
-                                HomeDetailsPresenter.this.homePageDetails = homePageDetails;
+                                String res = new Gson().toJson(homeMenuList);
+                                Log.e("homemenuresponse", "" + res);
+                                MenuListPresenter.this.homeMenuList = homeMenuList;
+
                             }
                         }).run();
-
                     }
                 });
     }

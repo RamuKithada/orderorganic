@@ -1,6 +1,6 @@
 package com.pracha.orderorganic.views;
 
-import com.pracha.orderorganic.models.home.HomePageDetails;
+import com.pracha.orderorganic.models.models.home.HomePageDetails;
 
 public interface HomeDetailsView extends BaseView {
 

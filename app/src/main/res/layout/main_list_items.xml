@@ -6,20 +6,21 @@
     android:orientation="vertical">
 
     <RelativeLayout
+        android:id="@+id/banner1_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
+            android:id="@+id/banner1_pager"
             android:layout_width="match_parent"
             android:layout_height="140dp"
             android:layout_alignParentTop="true" />
 
         <com.pracha.orderorganic.utils.CirclePageIndicator
-            android:id="@+id/indicator"
+            android:id="@+id/banner1_indicator"
             android:layout_width="fill_parent"
             android:layout_height="38dp"
-            android:layout_alignBottom="@id/pager"
+            android:layout_alignBottom="@id/banner1_pager"
             android:layout_centerHorizontal="true"
             android:gravity="bottom"
             android:padding="10dp"
@@ -35,4 +36,369 @@
         android:layout_height="wrap_content">
 
     </android.support.v7.widget.RecyclerView>
+
+    <RelativeLayout
+        android:id="@+id/top_offers_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvtopoffer_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/itemImage"
+            android:background="@color/colorPrimary"
+            android:gravity="start"
+            android:padding="8dp"
+            android:text="TOP OFFERS"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvtop_offer_view_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tvtopoffer_head"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/itemImage"
+            android:gravity="end"
+            android:paddingRight="12dp"
+            android:text="see more"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/top_offer_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvtopoffer_head"
+            android:layout_margin="@dimen/_12sdp"
+            android:background="@color/silver">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/banner2_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/banner2_pager"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_alignParentTop="true" />
+
+        <com.pracha.orderorganic.utils.CirclePageIndicator
+            android:id="@+id/banner2_indicator"
+            android:layout_width="fill_parent"
+            android:layout_height="38dp"
+            android:layout_alignBottom="@id/banner2_pager"
+            android:layout_centerHorizontal="true"
+            android:gravity="bottom"
+            android:padding="10dp"
+            app:centered="true"
+            app:fillColor="@color/white"
+            app:pageColor="@color/grey"
+            app:snap="false" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/trend_offers_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvtrendoffer_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/itemImage"
+            android:background="@color/colorPrimary"
+            android:gravity="start"
+            android:padding="8dp"
+            android:text="TRENDING PRODUCTS"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvtrend_offer_view_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tvtrendoffer_head"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/itemImage"
+            android:gravity="end"
+            android:paddingRight="12dp"
+            android:text="see more"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/trend_offer_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvtrendoffer_head"
+            android:layout_margin="@dimen/_12sdp"
+            android:background="@color/silver">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/offers_for_you_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvoffer_you_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/itemImage"
+            android:background="@color/colorPrimary"
+            android:gravity="start"
+            android:padding="8dp"
+            android:text="OFFERS FOR YOU"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvoffer_you_view_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tvoffer_you_head"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/itemImage"
+            android:gravity="end"
+            android:paddingRight="12dp"
+            android:text="see more"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/offers_for_you_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvoffer_you_head"
+            android:layout_margin="@dimen/_12sdp"
+            android:background="@color/silver">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/banner3_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/banner3_pager"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_alignParentTop="true" />
+
+        <com.pracha.orderorganic.utils.CirclePageIndicator
+            android:id="@+id/banner3_indicator"
+            android:layout_width="fill_parent"
+            android:layout_height="38dp"
+            android:layout_alignBottom="@id/banner3_pager"
+            android:layout_centerHorizontal="true"
+            android:gravity="bottom"
+            android:padding="10dp"
+            app:centered="true"
+            app:fillColor="@color/white"
+            app:pageColor="@color/grey"
+            app:snap="false" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/deals_of_day_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvdeals_of_day_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/itemImage"
+            android:background="@color/colorPrimary"
+            android:gravity="start"
+            android:padding="8dp"
+            android:text="DEALS OF THE DAY"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvdeals_of_day_view_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tvdeals_of_day_head"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/itemImage"
+            android:gravity="end"
+            android:paddingRight="12dp"
+            android:text="see more"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/deals_of_day_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvdeals_of_day_head"
+            android:layout_margin="@dimen/_12sdp"
+            android:background="@color/silver">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/season_sale_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvseason_sale_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/itemImage"
+            android:background="@color/colorPrimary"
+            android:gravity="start"
+            android:padding="8dp"
+            android:text="SEASON SALES"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvseason_sale_view_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tvseason_sale_head"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/itemImage"
+            android:gravity="end"
+            android:paddingRight="12dp"
+            android:text="see more"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/season_sale_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvseason_sale_head"
+            android:layout_margin="@dimen/_12sdp"
+            android:background="@color/silver">
+
+        </android.support.v7.widget.RecyclerView>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/banner4_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone">
+
+        <android.support.v4.view.ViewPager
+            android:id="@+id/banner4_pager"
+            android:layout_width="match_parent"
+            android:layout_height="140dp"
+            android:layout_alignParentTop="true" />
+
+        <com.pracha.orderorganic.utils.CirclePageIndicator
+            android:id="@+id/banner4_indicator"
+            android:layout_width="fill_parent"
+            android:layout_height="38dp"
+            android:layout_alignBottom="@id/banner4_pager"
+            android:layout_centerHorizontal="true"
+            android:gravity="bottom"
+            android:padding="10dp"
+            app:centered="true"
+            app:fillColor="@color/white"
+            app:pageColor="@color/grey"
+            app:snap="false" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/recently_viewed_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:background="@color/white"
+        android:visibility="gone">
+
+        <TextView
+            android:id="@+id/tvrecently_viewed_head"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/itemImage"
+            android:background="@color/colorPrimary"
+            android:gravity="start"
+            android:padding="8dp"
+            android:text="RECENTLY VIEWED"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/tvrecently_viewed_view_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@id/tvrecently_viewed_head"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@id/itemImage"
+            android:gravity="end"
+            android:paddingRight="12dp"
+            android:text="see more"
+            android:textColor="@color/colorPrimary"
+            android:textSize="18sp" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recently_viewed_recycler"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tvrecently_viewed_head"
+            android:layout_margin="@dimen/_12sdp"
+            android:background="@color/silver">
+
+        </android.support.v7.widget.RecyclerView>
+
+
+    </RelativeLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/category_wise_products_recycler"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+    </android.support.v7.widget.RecyclerView>
+
+
 </LinearLayout>

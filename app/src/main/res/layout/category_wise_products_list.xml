@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/categories_wise_products_layout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_15sdp"
+    android:background="@color/white"
+    android:visibility="visible"
+    >
+
+    <TextView
+        android:id="@+id/tvcategories_wise_products_head"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/itemImage"
+        android:background="@color/colorPrimary"
+        android:gravity="start"
+        android:padding="8dp"
+        android:text="RECENTLY VIEWED"
+        android:textColor="@color/white"
+        android:textSize="16sp" />
+
+    <TextView
+        android:id="@+id/tvcategories_wise_products_view_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@id/tvcategories_wise_products_head"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@id/itemImage"
+        android:gravity="end"
+        android:paddingRight="12dp"
+        android:text="see more"
+        android:textColor="@color/colorPrimary"
+        android:textSize="18sp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/categories_wise_products_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvcategories_wise_products_head"
+        android:layout_margin="@dimen/_12sdp"
+        android:background="@color/silver">
+
+    </android.support.v7.widget.RecyclerView>
+
+
+</RelativeLayout>

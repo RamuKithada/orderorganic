@@ -1,5 +1,6 @@
 package com.pracha.orderorganic.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.os.Parcelable;
 import android.support.annotation.NonNull;
@@ -12,20 +13,23 @@ import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
 import com.pracha.orderorganic.R;
-import com.pracha.orderorganic.models.home.Banners1;
+import com.pracha.orderorganic.models.models.home.Banners1;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class BannerAdapter extends PagerAdapter {
 
-    private ArrayList<Banners1> banners1ArrayList;
+    private List<Banners1> banners1ArrayList;
     private LayoutInflater layoutInflater;
-    private Context context;
+    private Activity context;
+    private String banner1_image_path;
 
-    public BannerAdapter(ArrayList<Banners1> banners1ArrayList, Context context) {
+    public BannerAdapter(List<Banners1> banners1ArrayList, Activity context, String banner1_image_path) {
         this.banners1ArrayList = banners1ArrayList;
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
+        this.banner1_image_path = banner1_image_path;
     }
 
     @Override
@@ -47,7 +51,7 @@ public class BannerAdapter extends PagerAdapter {
         final ImageView imageView = (ImageView) bannerImage
                 .findViewById(R.id.image);
         Glide.with(context)
-                .load("http://test.shofus.com/assets/appbanners/"+banners1ArrayList.get(position).getImg1())
+                .load(banner1_image_path+banners1ArrayList.get(position).getImg1())
                 .placeholder(R.drawable.background)
                 .into(imageView);
         container.addView(bannerImage,0);

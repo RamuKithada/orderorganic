@@ -8,4 +8,5 @@ public class MYURL {
     public static String PRODUCTION_BASE_URL = "http://test.shofus.com/api/customerApi/";
     public static String TEST_BASE_URL = "";
     public static final String HOME_PAGE_API = "homepage";
+    public static final String HOME_MENU_API = "homepage_menu";
 }
