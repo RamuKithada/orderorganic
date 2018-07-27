@@ -1,9 +1,12 @@
 package com.pracha.orderorganic.models.models.home;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Topoffer {
+public class Topoffer implements Parcelable {
     @SerializedName("category_id")
     @Expose
     private String categoryId;
@@ -49,4 +52,38 @@ public class Topoffer {
         this.categoryName = categoryName;
     }
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(this.categoryId);
+        dest.writeString(this.offerPercentage);
+        dest.writeString(this.itemImage);
+        dest.writeString(this.categoryName);
+    }
+
+    public Topoffer() {
+    }
+
+    protected Topoffer(Parcel in) {
+        this.categoryId = in.readString();
+        this.offerPercentage = in.readString();
+        this.itemImage = in.readString();
+        this.categoryName = in.readString();
+    }
+
+    public static final Parcelable.Creator<Topoffer> CREATOR = new Parcelable.Creator<Topoffer>() {
+        @Override
+        public Topoffer createFromParcel(Parcel source) {
+            return new Topoffer(source);
+        }
+
+        @Override
+        public Topoffer[] newArray(int size) {
+            return new Topoffer[size];
+        }
+    };
 }

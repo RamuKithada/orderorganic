@@ -1,6 +1,7 @@
 package com.pracha.orderorganic.adapters;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
@@ -11,19 +12,24 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.pracha.orderorganic.R;
-import com.pracha.orderorganic.models.models.home.Banners1;
+import com.pracha.orderorganic.activity.SeeMoreActivity;
 import com.pracha.orderorganic.models.models.home.HomePageDetails;
 import com.pracha.orderorganic.utils.CirclePageIndicator;
-
-import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class HomeMainAdapter extends RecyclerView.Adapter<HomeMainAdapter.MyViewHolder> {
 
+    public static final String TRENDING_PRODUCTS = "trending_products";
+    public static final String TOP_OFFERS = "top_offers";
+    public static final String OFFERS_FOR_YOU = "offers_for_you";
+    public static final String DEALS_OF_THE_DAY = "deals_of_the_day";
+    public static final String SEASON_SALE = "season_sale";
+    public static final String RECENTLY_VIEWED = "recently_viewed";
     private Activity context;
     private HomePageDetails homePageDetails;
 
@@ -41,120 +47,188 @@ public class HomeMainAdapter extends RecyclerView.Adapter<HomeMainAdapter.MyView
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        if (homePageDetails.getBanners1().size() > 0) {
+        final String imagepath = homePageDetails.getImagepath();
+        String category_image_path = homePageDetails.getCategoryimage();
+        final Intent intent = new Intent(context, SeeMoreActivity.class);
+        if (homePageDetails.getBanners().size() > 0) {
             String banner1_image_path = homePageDetails.getBanners1path();
-            holder.viewPager.setAdapter(new BannerAdapter(homePageDetails.getBanners1(), context,banner1_image_path));
+            holder.viewPager.setAdapter(new BannerAdapter(homePageDetails.getBanners(), context, banner1_image_path));
             holder.circlePageIndicator.setViewPager(holder.viewPager);
         }
         if (homePageDetails.getCategorylist().size() > 0) {
-            String category_image_path = homePageDetails.getCategoryimage();
             holder.category_recycler.setHasFixedSize(true);
             holder.category_recycler.setNestedScrollingEnabled(false);
             holder.category_recycler.setLayoutManager(new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false));
             holder.category_recycler.setAdapter(new CategoryListAdapter(context, homePageDetails.getCategorylist(), category_image_path));
         }
-        int top_list_size = homePageDetails.getTopoffer().size();
+        final int top_list_size = homePageDetails.getTopoffer().size();
         if (top_list_size > 4) {
-            String category_image_path = homePageDetails.getImagepath();
             holder.top_offers_layout.setVisibility(View.VISIBLE);
             holder.top_offer_recycler.setHasFixedSize(true);
             holder.top_offer_recycler.setNestedScrollingEnabled(false);
             holder.top_offer_recycler.setLayoutManager(new GridLayoutManager(context, 2));
-            holder.top_offer_recycler.setAdapter(new TopOfferAdapter(context, homePageDetails.getTopoffer(), category_image_path, 4));
+            holder.top_offer_recycler.setAdapter(new TopOfferAdapter(context, homePageDetails.getTopoffer(), imagepath, 4));
         } else if (top_list_size > 0) {
-            String category_image_path = homePageDetails.getImagepath();
             holder.top_offers_layout.setVisibility(View.VISIBLE);
             holder.top_offer_recycler.setHasFixedSize(true);
             holder.top_offer_recycler.setNestedScrollingEnabled(false);
             holder.top_offer_recycler.setLayoutManager(new GridLayoutManager(context, 2));
-            holder.top_offer_recycler.setAdapter(new TopOfferAdapter(context, homePageDetails.getTopoffer(), category_image_path, top_list_size));
+            holder.top_offer_recycler.setAdapter(new TopOfferAdapter(context, homePageDetails.getTopoffer(), imagepath, top_list_size));
         }
-        int trend_list_size = homePageDetails.getTrendingproducts().size();
+        holder.tvtop_offfer_view_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (top_list_size > 0) {
+                    intent.putExtra("imagepath", imagepath);
+                    intent.putExtra("size", top_list_size);
+                    intent.putExtra("list_type", TOP_OFFERS);
+                    context.startActivity(intent);
+                }else {
+                    Toast.makeText(context,"No more Items Available",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        final int trend_list_size = homePageDetails.getTrendingproducts().size();
         if (trend_list_size > 4) {
-            String category_image_path = homePageDetails.getImagepath();
             holder.trend_offers_layout.setVisibility(View.VISIBLE);
             holder.trend_offer_recycler.setHasFixedSize(true);
             holder.trend_offer_recycler.setNestedScrollingEnabled(false);
             holder.trend_offer_recycler.setLayoutManager(new GridLayoutManager(context, 2));
-            holder.trend_offer_recycler.setAdapter(new TrendingProductsAdapter(context, homePageDetails.getTrendingproducts(), category_image_path, 4));
+            holder.trend_offer_recycler.setAdapter(new TrendingProductsAdapter(context, homePageDetails.getTrendingproducts(), imagepath, 4));
         } else if (trend_list_size > 0) {
-            String category_image_path = homePageDetails.getImagepath();
             holder.trend_offers_layout.setVisibility(View.VISIBLE);
             holder.trend_offer_recycler.setHasFixedSize(true);
             holder.trend_offer_recycler.setNestedScrollingEnabled(false);
             holder.trend_offer_recycler.setLayoutManager(new GridLayoutManager(context, 2));
-            holder.trend_offer_recycler.setAdapter(new TrendingProductsAdapter(context, homePageDetails.getTrendingproducts(), category_image_path, trend_list_size));
+            holder.trend_offer_recycler.setAdapter(new TrendingProductsAdapter(context, homePageDetails.getTrendingproducts(), imagepath, trend_list_size));
         }
-        int offer_you_list_size = homePageDetails.getOffersforyou().size();
+        holder.tvtrend_offer_view_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (trend_list_size > 0) {
+//                    ((SeeMoreActivity) context).seeTrendOffers(homePageDetails.getTrendingproducts(), imagepath, trend_list_size);
+                    intent.putExtra("imagepath", imagepath);
+                    intent.putExtra("size", trend_list_size);
+                    intent.putExtra("list_type", TRENDING_PRODUCTS);
+                    context.startActivity(intent);
+                }else {
+                    Toast.makeText(context,"No more Items Available",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        final int offer_you_list_size = homePageDetails.getOffersforyou().size();
         if (offer_you_list_size > 4) {
-            String category_image_path = homePageDetails.getImagepath();
             holder.offers_for_you_layout.setVisibility(View.VISIBLE);
             holder.offers_for_you_recycler.setHasFixedSize(true);
             holder.offers_for_you_recycler.setNestedScrollingEnabled(false);
             holder.offers_for_you_recycler.setLayoutManager(new GridLayoutManager(context, 2));
-            holder.offers_for_you_recycler.setAdapter(new OffersForYouAdapter(context, homePageDetails.getOffersforyou(), category_image_path, 4));
+            holder.offers_for_you_recycler.setAdapter(new OffersForYouAdapter(context, homePageDetails.getOffersforyou(), imagepath, 4));
         } else if (offer_you_list_size > 0) {
-            String category_image_path = homePageDetails.getImagepath();
             holder.offers_for_you_layout.setVisibility(View.VISIBLE);
             holder.offers_for_you_recycler.setHasFixedSize(true);
             holder.offers_for_you_recycler.setNestedScrollingEnabled(false);
             holder.offers_for_you_recycler.setLayoutManager(new GridLayoutManager(context, 2));
-            holder.offers_for_you_recycler.setAdapter(new OffersForYouAdapter(context, homePageDetails.getOffersforyou(), category_image_path, offer_you_list_size));
+            holder.offers_for_you_recycler.setAdapter(new OffersForYouAdapter(context, homePageDetails.getOffersforyou(), imagepath, offer_you_list_size));
         }
-        int deals_list_size = homePageDetails.getDealsoftheday().size();
+        holder.tvoffer_you_view_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(offer_you_list_size>0){
+                    intent.putExtra("imagepath", imagepath);
+                    intent.putExtra("size", offer_you_list_size);
+                    intent.putExtra("list_type", OFFERS_FOR_YOU);
+                    context.startActivity(intent);
+                }else {
+                    Toast.makeText(context,"No more Items Available",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        final int deals_list_size = homePageDetails.getDealsoftheday().size();
         if (deals_list_size > 4) {
-            String category_image_path = homePageDetails.getImagepath();
             holder.deals_of_day_layout.setVisibility(View.VISIBLE);
             holder.deals_of_day_recycler.setHasFixedSize(true);
             holder.deals_of_day_recycler.setNestedScrollingEnabled(false);
             holder.deals_of_day_recycler.setLayoutManager(new GridLayoutManager(context, 2));
-            holder.deals_of_day_recycler.setAdapter(new DealsOfDayAdapter(context, homePageDetails.getDealsoftheday(), category_image_path, 4));
+            holder.deals_of_day_recycler.setAdapter(new DealsOfDayAdapter(context, homePageDetails.getDealsoftheday(), imagepath, 4));
         } else if (deals_list_size > 0) {
-            String category_image_path = homePageDetails.getImagepath();
             holder.deals_of_day_layout.setVisibility(View.VISIBLE);
             holder.deals_of_day_recycler.setHasFixedSize(true);
             holder.deals_of_day_recycler.setNestedScrollingEnabled(false);
             holder.deals_of_day_recycler.setLayoutManager(new GridLayoutManager(context, 2));
-            holder.deals_of_day_recycler.setAdapter(new DealsOfDayAdapter(context, homePageDetails.getDealsoftheday(), category_image_path, deals_list_size));
+            holder.deals_of_day_recycler.setAdapter(new DealsOfDayAdapter(context, homePageDetails.getDealsoftheday(), imagepath, deals_list_size));
         }
-        int season_list_size = homePageDetails.getSeasonsales().size();
+        holder.tvdeals_of_day_view_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(deals_list_size>0){
+                    intent.putExtra("imagepath", imagepath);
+                    intent.putExtra("size", deals_list_size);
+                    intent.putExtra("list_type", DEALS_OF_THE_DAY);
+                    context.startActivity(intent);
+                }else {
+                    Toast.makeText(context,"No more Items Available",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        final int season_list_size = homePageDetails.getSeasonsales().size();
         if (season_list_size > 4) {
-            String category_image_path = homePageDetails.getImagepath();
             holder.season_sale_layout.setVisibility(View.VISIBLE);
             holder.season_sale_recycler.setHasFixedSize(true);
             holder.season_sale_recycler.setNestedScrollingEnabled(false);
             holder.season_sale_recycler.setLayoutManager(new GridLayoutManager(context, 2));
-            holder.season_sale_recycler.setAdapter(new SeasonSaleAdapter(context, homePageDetails.getSeasonsales(), category_image_path, 4));
+            holder.season_sale_recycler.setAdapter(new SeasonSaleAdapter(context, homePageDetails.getSeasonsales(), imagepath, 4));
         } else if (season_list_size > 0) {
-            String category_image_path = homePageDetails.getImagepath();
             holder.season_sale_layout.setVisibility(View.VISIBLE);
             holder.season_sale_recycler.setHasFixedSize(true);
             holder.season_sale_recycler.setNestedScrollingEnabled(false);
             holder.season_sale_recycler.setLayoutManager(new GridLayoutManager(context, 2));
-            holder.season_sale_recycler.setAdapter(new SeasonSaleAdapter(context, homePageDetails.getSeasonsales(), category_image_path, season_list_size));
+            holder.season_sale_recycler.setAdapter(new SeasonSaleAdapter(context, homePageDetails.getSeasonsales(), imagepath, season_list_size));
         }
-        int recently_list_size = homePageDetails.getRecentlyviewed().size();
+        holder.tvseason_sale_view_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(season_list_size>0){
+                    intent.putExtra("imagepath", imagepath);
+                    intent.putExtra("size", season_list_size);
+                    intent.putExtra("list_type", SEASON_SALE);
+                    context.startActivity(intent);
+                }else {
+                    Toast.makeText(context,"No more Items Available",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
+        final int recently_list_size = homePageDetails.getRecentlyviewed().size();
         if (recently_list_size > 4) {
-            String category_image_path = homePageDetails.getImagepath();
             holder.recently_viewed_layout.setVisibility(View.VISIBLE);
             holder.recently_viewed_recycler.setHasFixedSize(true);
             holder.recently_viewed_recycler.setNestedScrollingEnabled(false);
             holder.recently_viewed_recycler.setLayoutManager(new GridLayoutManager(context, 2));
-            holder.recently_viewed_recycler.setAdapter(new RecentlyViewedAdapter(context, homePageDetails.getRecentlyviewed(), category_image_path, 4));
+            holder.recently_viewed_recycler.setAdapter(new RecentlyViewedAdapter(context, homePageDetails.getRecentlyviewed(), imagepath, 4));
         } else if (recently_list_size > 0) {
-            String category_image_path = homePageDetails.getImagepath();
             holder.recently_viewed_layout.setVisibility(View.VISIBLE);
             holder.recently_viewed_recycler.setHasFixedSize(true);
             holder.recently_viewed_recycler.setNestedScrollingEnabled(false);
             holder.recently_viewed_recycler.setLayoutManager(new GridLayoutManager(context, 2));
-            holder.recently_viewed_recycler.setAdapter(new RecentlyViewedAdapter(context, homePageDetails.getRecentlyviewed(), category_image_path, recently_list_size));
+            holder.recently_viewed_recycler.setAdapter(new RecentlyViewedAdapter(context, homePageDetails.getRecentlyviewed(), imagepath, recently_list_size));
         }
+        holder.tvrecently_viewed_view_more.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(recently_list_size>0) {
+                    intent.putExtra("imagepath", imagepath);
+                    intent.putExtra("size", recently_list_size);
+                    intent.putExtra("list_type", RECENTLY_VIEWED);
+                    context.startActivity(intent);
+                }else {
+                    Toast.makeText(context,"No more Items Available",Toast.LENGTH_LONG).show();
+                }
+            }
+        });
         if (homePageDetails.getCategorywiseproductlist().size() > 0) {
-            String category_image_path = homePageDetails.getImagepath();
             holder.category_wise_products_recycler.setHasFixedSize(true);
             holder.category_wise_products_recycler.setNestedScrollingEnabled(false);
             holder.category_wise_products_recycler.setLayoutManager(new LinearLayoutManager(context));
-            holder.category_wise_products_recycler.setAdapter(new CategoryWiseProductsAdapter(context, homePageDetails.getCategorywiseproductlist(), category_image_path));
+            holder.category_wise_products_recycler.setAdapter(new CategoryWiseProductsAdapter(context, homePageDetails.getCategorywiseproductlist(), imagepath));
         }
     }
 

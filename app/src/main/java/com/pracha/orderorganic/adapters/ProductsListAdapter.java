@@ -55,7 +55,11 @@ public class ProductsListAdapter extends RecyclerView.Adapter<ProductsListAdapte
             holder.tvPrice.setText(activity.getString(R.string.Rs)+productList.getSpecialPrice());
             //removing strike through
 //            tv.setPaintFlags(tv.getPaintFlags() & (~ Paint.STRIKE_THRU_TEXT_FLAG));
-            holder.tv_discount.setText("Min " + productList.getPercentage()+"% Off");
+            if(productList.getPercentage()!=null) {
+                holder.tv_discount.setText("Min " + productList.getPercentage() + "% Off");
+            } else {
+                holder.tv_discount.setVisibility(View.GONE);
+            }
             holder.tv_discount.setTextColor(Color.parseColor("#36DD31"));
             if(productList.getItemImage()!=null){
                 Glide.with(activity)

@@ -2,18 +2,6 @@ package com.pracha.orderorganic.models.models.home;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.pracha.orderorganic.models.models.home.Banners1;
-import com.pracha.orderorganic.models.models.home.Banners2;
-import com.pracha.orderorganic.models.models.home.Banners3;
-import com.pracha.orderorganic.models.models.home.Banners4;
-import com.pracha.orderorganic.models.models.home.Categorylist;
-import com.pracha.orderorganic.models.models.home.Categorywiseproductlist;
-import com.pracha.orderorganic.models.models.home.Dealsoftheday;
-import com.pracha.orderorganic.models.models.home.Offersforyou;
-import com.pracha.orderorganic.models.models.home.Recentlyviewed;
-import com.pracha.orderorganic.models.models.home.Seasonsale;
-import com.pracha.orderorganic.models.models.home.Topoffer;
-import com.pracha.orderorganic.models.models.home.Trendingproduct;
 
 import java.util.List;
 
@@ -23,7 +11,7 @@ public class HomePageDetails {
     private int status;
     @SerializedName("banners1")
     @Expose
-    private List<Banners1> banners1 = null;
+    private List<Banners> banners = null;
     @SerializedName("categorylist")
     @Expose
     private List<Categorylist> categorylist = null;
@@ -32,7 +20,7 @@ public class HomePageDetails {
     private List<Topoffer> topoffer = null;
     @SerializedName("banners2")
     @Expose
-    private List<Banners2> banners2 = null;
+    private List<Banners> banners2 = null;
     @SerializedName("trendingproducts")
     @Expose
     private List<Trendingproduct> trendingproducts = null;
@@ -41,7 +29,7 @@ public class HomePageDetails {
     private List<Offersforyou> offersforyou = null;
     @SerializedName("banners3")
     @Expose
-    private List<Banners3> banners3 = null;
+    private List<Banners> banners3 = null;
     @SerializedName("dealsoftheday")
     @Expose
     private List<Dealsoftheday> dealsoftheday = null;
@@ -50,7 +38,7 @@ public class HomePageDetails {
     private List<Seasonsale> seasonsales = null;
     @SerializedName("banners4")
     @Expose
-    private List<Banners4> banners4 = null;
+    private List<Banners> banners4 = null;
     @SerializedName("recentlyviewed")
     @Expose
     private List<Recentlyviewed> recentlyviewed = null;
@@ -81,12 +69,12 @@ public class HomePageDetails {
         this.status = status;
     }
 
-    public List<Banners1> getBanners1() {
-        return banners1;
+    public List<Banners> getBanners() {
+        return banners;
     }
 
-    public void setBanners1(List<Banners1> banners1) {
-        this.banners1 = banners1;
+    public void setBanners(List<Banners> banners) {
+        this.banners = banners;
     }
 
     public List<Categorylist> getCategorylist() {
@@ -105,11 +93,11 @@ public class HomePageDetails {
         this.topoffer = topoffer;
     }
 
-    public List<Banners2> getBanners2() {
+    public List<Banners> getBanners2() {
         return banners2;
     }
 
-    public void setBanners2(List<Banners2> banners2) {
+    public void setBanners2(List<Banners> banners2) {
         this.banners2 = banners2;
     }
 
@@ -129,11 +117,11 @@ public class HomePageDetails {
         this.offersforyou = offersforyou;
     }
 
-    public List<Banners3> getBanners3() {
+    public List<Banners> getBanners3() {
         return banners3;
     }
 
-    public void setBanners3(List<Banners3> banners3) {
+    public void setBanners3(List<Banners> banners3) {
         this.banners3 = banners3;
     }
 
@@ -153,11 +141,11 @@ public class HomePageDetails {
         this.seasonsales = seasonsales;
     }
 
-    public List<Banners4> getBanners4() {
+    public List<Banners> getBanners4() {
         return banners4;
     }
 
-    public void setBanners4(List<Banners4> banners4) {
+    public void setBanners4(List<Banners> banners4) {
         this.banners4 = banners4;
     }
 

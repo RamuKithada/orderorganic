@@ -55,7 +55,7 @@ public class HomeDetailsPresenter implements BasePresenter<HomeDetailsView> {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.e("HomeError", "" + e.getMessage());
+                        Log.e("HomeErrords", "" + e.getMessage());
                         homeDetailsView.showProgressIndicator(false);
                     }
 

@@ -1,6 +1,7 @@
 package com.pracha.orderorganic.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -11,12 +12,13 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ExpandableListView;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
 import com.aurelhubert.ahbottomnavigation.notification.AHNotification;
 import com.pracha.orderorganic.R;
-import com.pracha.orderorganic.fragments.CartFragment;
 import com.pracha.orderorganic.fragments.HomeFragment;
 import com.pracha.orderorganic.fragments.OffersFragment;
 import com.pracha.orderorganic.fragments.ProfileFragment;
@@ -52,14 +54,6 @@ public class MainActivity extends BaseActivity
     @Override
     protected void onStart() {
         super.onStart();
-        menuListPresenter = new MenuListPresenter();
-        menuListPresenter.attachView(this);
-        if (ConnectionDetector.isConnectedToInternet(MainActivity.this)) {
-            showProgressIndicator(true);
-            menuListPresenter.getMenuListDetails();
-        } else {
-            Utilities.showToastLong(Constants.NO_INTERNET_CONNECTION_TAG, MainActivity.this);
-        }
     }
 
     @Override
@@ -69,7 +63,14 @@ public class MainActivity extends BaseActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
-
+        menuListPresenter = new MenuListPresenter();
+        menuListPresenter.attachView(this);
+        if (ConnectionDetector.isConnectedToInternet(MainActivity.this)) {
+            showProgressIndicator(true);
+            menuListPresenter.getMenuListDetails();
+        } else {
+            Utilities.showToastLong(Constants.NO_INTERNET_CONNECTION_TAG, MainActivity.this);
+        }
         getSupportFragmentManager().beginTransaction()
                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                 .replace(R.id.content_frame, new HomeFragment())
@@ -86,6 +87,25 @@ public class MainActivity extends BaseActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        navigationExpandableListView.addOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
+
+                HeaderModel headerModel = (HeaderModel) parent.getAdapter().getItem(groupPosition);
+                if (headerModel.getTitle().equals("Track order")) {
+                    showMessage(headerModel.getTitle() + " Clicked");
+                } else if (headerModel.getTitle().equals("Account details")) {
+                    showMessage(headerModel.getTitle() + " Clicked");
+                } else if (headerModel.getTitle().equals("Settings")) {
+                    showMessage(headerModel.getTitle() + " Clicked");
+                } else if (headerModel.getTitle().equals("Sign out")) {
+                    showMessage(headerModel.getTitle() + " Clicked");
+                }
+
+                return false;
+            }
+        });
 
         /*
 
@@ -214,10 +234,11 @@ public class MainActivity extends BaseActivity
                                 .commit();
                         break;
                     case 2:
-                        getSupportFragmentManager().beginTransaction()
+                        /*getSupportFragmentManager().beginTransaction()
                                 .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
                                 .replace(R.id.content_frame, new CartFragment())
-                                .commit();
+                                .commit();*/
+                        startActivity(new Intent(MainActivity.this, SigninActivity.class));
                         break;
                     case 3:
                         getSupportFragmentManager().beginTransaction()
@@ -322,6 +343,10 @@ public class MainActivity extends BaseActivity
                         }
                         navigationExpandableListView.setListMenu(headerModelList);
                     }
+                    navigationExpandableListView.addHeaderModel(new HeaderModel("Track order"))
+                            .addHeaderModel(new HeaderModel("Account details"))
+                            .addHeaderModel(new HeaderModel("Settings"))
+                            .addHeaderModel(new HeaderModel("Sign out"));
                     navigationExpandableListView.build();
                 }
                 Utilities.showToastLong("Successfull" + homeMenuList.getCategorylist().get(13).getSubcategoryList().size(), MainActivity.this);

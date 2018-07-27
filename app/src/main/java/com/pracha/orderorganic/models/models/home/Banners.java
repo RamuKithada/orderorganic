@@ -1,9 +1,10 @@
 package com.pracha.orderorganic.models.models.home;
 
+
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Banners3 {
+public class Banners {
 
     @SerializedName("img1")
     @Expose

@@ -2,6 +2,7 @@ package com.pracha.orderorganic.adapters;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.pracha.orderorganic.R;
+import com.pracha.orderorganic.activity.SubCategoryActivity;
 import com.pracha.orderorganic.models.models.home.Categorylist;
 
 import java.util.List;
@@ -41,7 +43,7 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        Categorylist categorylist = categorylists.get(position);
+        final Categorylist categorylist = categorylists.get(position);
         try {
             holder.item_title.setText(categorylist.getCategoryName());
             if (categorylist.getCategoryImage() != null) {
@@ -50,6 +52,16 @@ public class CategoryListAdapter extends RecyclerView.Adapter<CategoryListAdapte
                         .placeholder(R.drawable.background)
                         .into(holder.item_image);
             }
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(context, SubCategoryActivity.class);
+                    String cat_id = categorylist.getCategoryId();
+                    intent.putExtra("cat_id",cat_id);
+                    intent.putExtra("cat_name",categorylist.getCategoryName());
+                    context.startActivity(intent);
+                }
+            });
 
         } catch (Exception e) {
             e.printStackTrace();

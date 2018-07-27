@@ -5,6 +5,7 @@ import android.content.Context;
 import android.support.multidex.MultiDex;
 
 import com.pracha.orderorganic.apis.MyService;
+import com.pracha.orderorganic.models.models.home.HomePageDetails;
 
 import rx.Scheduler;
 import rx.schedulers.Schedulers;
@@ -15,6 +16,16 @@ public class MyApplication extends Application {
     public static Context contextOfApplication;
     private static MyApplication mInstance;
     public MyService ckService;
+    public HomePageDetails homePageDetails;
+
+    public HomePageDetails getHomePageDetails() {
+        return homePageDetails;
+    }
+
+    public void setHomePageDetails(HomePageDetails homePageDetails) {
+        this.homePageDetails = homePageDetails;
+    }
+
     //    private Retrofit retrofit;
     private Scheduler defaultSubscribeScheduler;
 

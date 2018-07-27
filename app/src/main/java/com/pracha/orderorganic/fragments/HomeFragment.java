@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 
 import com.pracha.orderorganic.R;
 import com.pracha.orderorganic.adapters.HomeMainAdapter;
+import com.pracha.orderorganic.database.MyApplication;
 import com.pracha.orderorganic.models.models.home.HomePageDetails;
 import com.pracha.orderorganic.presenters.HomeDetailsPresenter;
 import com.pracha.orderorganic.utils.ConnectionDetector;
@@ -40,7 +41,7 @@ public class HomeFragment extends BaseFragment implements HomeDetailsView {
     RecyclerView home_main_recycler;
 
 
-//    private ArrayList<Banners1> banners1ArrayList = new ArrayList<>();
+//    private ArrayList<Banners> banners1ArrayList = new ArrayList<>();
 
     public HomeFragment() {
         // Required empty public constructor
@@ -68,15 +69,21 @@ public class HomeFragment extends BaseFragment implements HomeDetailsView {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.e("onViewCreated", "onViewCreated");
+        if(getActivity()!=null)
+            getActivity().setTitle("Home");
         homeDetailsPresenter = new HomeDetailsPresenter();
         homeDetailsPresenter.attachView(this);
+
         if (ConnectionDetector.isConnectedToInternet(getActivity())) {
             showProgressIndicator(true);
             homeDetailsPresenter.getHomeDetails();
         } else {
             Utilities.showToastLong(Constants.NO_INTERNET_CONNECTION_TAG, getActivity());
         }
+
     }
+
+
 
     @Override
     public void showMessage(int stringId) {
@@ -91,16 +98,20 @@ public class HomeFragment extends BaseFragment implements HomeDetailsView {
 
     @Override
     public void getHomeDetails(final HomePageDetails homePageDetails) {
-    /*    banners1ArrayList = (ArrayList<Banners1>) homePageDetails.getBanners1();
+    /*    banners1ArrayList = (ArrayList<Banners>) homePageDetails.getBanners();
         viewPager.setAdapter(new BannerAdapter(banners1ArrayList, getActivity()));
         circlePageIndicator.setViewPager(viewPager);*/
         if (homePageDetails.getStatus() > 0) {
             new Thread(new Runnable() {
                 @Override
                 public void run() {
+                    MyApplication myApplication;
+                    myApplication = MyApplication.get(MyApplication.getContextOfApplication());
+                    myApplication.setHomePageDetails(homePageDetails);
                     home_main_recycler.setNestedScrollingEnabled(false);
                     home_main_recycler.setLayoutManager(new LinearLayoutManager(getActivity()));
                     home_main_recycler.setAdapter(new HomeMainAdapter(getActivity(), homePageDetails));
+
                 }
             }).run();
         }
